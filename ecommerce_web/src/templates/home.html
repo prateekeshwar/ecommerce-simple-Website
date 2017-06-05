@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+
+{% block head_title %}Welcome | {{ block.super }}{% endblock %}
+<style>
+ {% block style %}
+  .navbar-static-top {
+      margin-bottom: 0px !important;
+  }
+  .jumbotron{
+      background-color:black;
+      color:#FFF;
+  }
+  {% endblock %}
+</style>
+ 
+    {% block jumbotron %}
+    <div class="jumbotron">
+        <div class="container">
+   
+        <div class="row">
+        <div class='col-sm-6'>
+        <h1>SHOP HERE....</h1>
+        <p>Hey Hello this a online shopping plattform.Join us today</p>
+        <p>
+        <a class="btn btn-lg btn-primary" href="/signup" role="button">Join Us &raquo;</a>
+        </p>
+        </div>
+       
+        </div>      
+        </div>
+ </div>
+{% endblock %}
+{% block content %}
+<div class='col-sm-6 col-sm-offset-3'> 
+      <h1>{{ title }}</h1>
+   {% for alb in category_list %} 
+   
+   
+         
+  <!-- {{ alb.album_logo }}<br/>-->        
+
+    
+
+<div class='row'> 
+  <div class="col-sm-12">
+    <div class="thumbnail">
+        {% if alb.category_logo %}
+        <img src='{{ alb.category_logo.url }}' class='img-responsive' />
+        {% endif %}
+      <div class="caption">
+        <h3> {{ alb.category_title }} <small>{{ alb.timestamp|timesince }} ago </small></h3>
+        <p> {{ alb.Name }}<br/>{{ alb.Price }}<br/> </p>
+        <p><a href='' class="btn btn-primary" role="button">Add to cart</a></p>
+        <p><a href='' class="btn btn-primary" role="button">wishlist</a></p>
+       
+      </div>
+    </div>
+  </div>
+ 
+   </div> 
+    
+    
+    
+     {% endfor %} 
+     
+<div class="pagination">
+    <span class="step-links">
+        {% if category_list.has_previous %}
+            <a href="?page={{ .previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ category_list.number }} of {{ category_list.paginator.num_pages }}.
+        </span>
+
+        {% if category_list.has_next %}
+            <a href="?page={{ album_list.next_page_number }}">next</a>
+        {% endif %}
+    </span>
+</div>
+     
+     
+     </div>  
+
+            
+{% endblock %}
